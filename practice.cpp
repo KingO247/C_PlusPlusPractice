@@ -1,20 +1,23 @@
 #include <iostream>
 #include <iomanip>
+#include <memory>
 using namespace std;
 
-void showValues(int [], const int);
+int doSomething(int* x, int* y); 
 
-int main(){
 
-const int SIZE = 5;
-int numbers[SIZE] = { 1, 2, 3, 4, 5 };
-showValues(numbers, SIZE);
+int main() {
+    int num1 = 10;
+    int num2 = 20;
+    int num3 = doSomething(&num1,&num2);
+    cout << num3 << endl;
 
 }
 
-void showValues(int values[], int size){
-    for (int count = 0; count < size; count++){
-        cout << values[count] << endl;
-    }
-}
+int doSomething(int *x, int *y){
 
+int temp = *x;
+    *x = *y * 10;
+    *y = temp * 10;
+return *x + *y;
+}
