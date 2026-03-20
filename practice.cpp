@@ -1,23 +1,50 @@
 #include <iostream>
 #include <iomanip>
 #include <memory>
+#include <algorithm>
 using namespace std;
 
-int doSomething(int* x, int* y); 
 
+void sortArray(double [], int );
+double avgScore(double[], int);
+void displayResults(double, double[], int);
 
 int main() {
-    int num1 = 10;
-    int num2 = 20;
-    int num3 = doSomething(&num1,&num2);
-    cout << num3 << endl;
+    int numTestScores = 0;
+    cout << "Enter number of test scores: ";
+    cin >> numTestScores;
+
+    double* dynamicArray = new double[numTestScores];
+
+    for (int i = 0; i < numTestScores; i++){
+        cout << "Enter score for test #" << i +1 << ": ";
+        cin >> dynamicArray[i];
+    }
+    
+
+    sortArray(dynamicArray, numTestScores);
+    double avg = avgScore(dynamicArray, numTestScores);
+    displayResults(avg, dynamicArray, numTestScores);
+    delete [] dynamicArray;
 
 }
 
-int doSomething(int *x, int *y){
+void displayResults(double avg, double dynamicArray[], int numTestScores){
+    
+    for (int i = 0; i < numTestScores; i++){
+        cout << "Score #" << i+1 << ": " << dynamicArray[i] << endl;
+    }
+    cout << "Average Score: " << avg << endl;
+}
 
-int temp = *x;
-    *x = *y * 10;
-    *y = temp * 10;
-return *x + *y;
+void sortArray(double dynamicArray[], int numTestScores){
+    sort(dynamicArray, dynamicArray + numTestScores);
+}
+
+double avgScore(double dynamicArray[], int numTestScores){
+    double sum = 0;
+    for (int i = 0; i  < numTestScores; i++){
+        sum += dynamicArray[i];
+    }
+    return sum/numTestScores;
 }
