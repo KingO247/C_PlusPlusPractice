@@ -5,9 +5,9 @@
 using namespace std;
 
 
-void sortArray(double [], int );
-double avgScore(double[], int);
-void displayResults(double, double[], int);
+void sortArray(double*, int );
+double avgScore(double*, int);
+void displayResults(double, double*, int);
 
 int main() {
     int numTestScores = 0;
@@ -29,22 +29,23 @@ int main() {
 
 }
 
-void displayResults(double avg, double dynamicArray[], int numTestScores){
+void displayResults(double avg, double* scores, int numTestScores){
     
     for (int i = 0; i < numTestScores; i++){
-        cout << "Score #" << i+1 << ": " << dynamicArray[i] << endl;
+        cout << "Score #" << i+1 << ": " << *(scores + i) << endl;
     }
     cout << "Average Score: " << avg << endl;
 }
 
-void sortArray(double dynamicArray[], int numTestScores){
-    sort(dynamicArray, dynamicArray + numTestScores);
+void sortArray(double* scores, int numTestScores){
+    sort(scores, scores + numTestScores);
+
 }
 
-double avgScore(double dynamicArray[], int numTestScores){
+double avgScore(double* scores, int numTestScores){
     double sum = 0;
     for (int i = 0; i  < numTestScores; i++){
-        sum += dynamicArray[i];
-    }
-    return sum/numTestScores;
+        sum += *(scores + i);
+}
+return sum/numTestScores;
 }
